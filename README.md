@@ -50,6 +50,18 @@ The figure below shows the middle slices of a TOF-MRA image taken from the sagit
 1. CLINICAL DATA
 * The continuous predictors were centered using zero-mean unit-variance normalization.
 * Missing values were imputed using mean imputation
+
 2. IMAGING DATA
 * Images were resized from 312x384x127 to 156x192x64 voxels due to memory constraints.  
 * The voxel intensity values were centered using zero-mean unit-variance normalization.
+* Images were loaded into a numpy array and saved as a compressed numpy file (.npz) to be used as input to train the model.
+The array has dimensions (313x156x192x64x1) where the final dimension indicates the number of channels (1). The size of the compressed file was around 4,5GB.
+
+### Clinical Data Framework: Multilayer Perceptron (MLP)
+The clinical data was modeled using an MLP with a single  fully  connected  (FC) hidden layer.
+* The hidden layer  neurons  were  rectified linear units (ReLUs).  
+* L2 norm regularization was introduced to penalize weights in the hidden and output layer neurons.
+* Dropout was used on the hidden layer neurons.
+
+### Neuroimaging Data Framework: Convolutional Neural Network (CNN)
+The 3D imaging data was modeled using a 3D convolutional neural network (CNN) consisting of three convolutional blocks followed by a single FC layer.
