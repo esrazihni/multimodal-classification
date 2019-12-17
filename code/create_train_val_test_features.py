@@ -1,5 +1,8 @@
 """
-Created on Wed Apr 24 2018
+File name: crear_train_val_test_features.py
+Author: Esra Zihni
+Date created: 24.04.2019
+
 
 
 """
@@ -14,8 +17,6 @@ import tensorflow as tf
 from keras.models import load_model, Model 
 from keras.backend.tensorflow_backend import set_session
 
-sys.path.append("/home/esra/Desktop/git_repos/outcome-prediction/clinical parameter-based")
-sys.path.append("/home/esra/Desktop/git_repos/outcome-prediction/TOF-based")
 from helper import dataset, model
 from imaging_predictive_models import imaging_dataset
 from clinical_predictive_models import clinical_dataset

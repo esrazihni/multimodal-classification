@@ -1,5 +1,7 @@
 """
-Created on Tue May 21 2019
+File name: end_to_end_gridsearch.py
+Author: Esra Zihni
+Date created: 21.05.2019
 
 
 """
@@ -25,8 +27,6 @@ from keras.callbacks import EarlyStopping
 from keras.utils import multi_gpu_model
 from keras.backend.tensorflow_backend import set_session
 
-sys.path.append("/home/esra/Desktop/git_repos/outcome-prediction/clinical parameter-based")
-sys.path.append("/home/esra/Desktop/git_repos/outcome-prediction/TOF-based")
 from helper import dataset, model
 from imaging_predictive_models import imaging_dataset
 from clinical_predictive_models import clinical_dataset, MLP

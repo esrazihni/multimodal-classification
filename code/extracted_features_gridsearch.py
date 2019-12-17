@@ -1,5 +1,8 @@
 """
-Created on Mon Apr 29 2019
+File name: extracted_features_gridsearch.py
+Author: Esra Zihni
+Date created: 29.04.2019
+
 
 
 """
@@ -23,8 +26,6 @@ from keras.backend.tensorflow_backend import set_session
 from sklearn.model_selection import ParameterGrid
 from sklearn.metrics import roc_auc_score
 
-sys.path.append("/home/esra/Desktop/git_repos/outcome-prediction/clinical parameter-based")
-sys.path.append("/home/esra/Desktop/git_repos/outcome-prediction/TOF-based")
 from helper import dataset, model
 from imaging_predictive_models import imaging_dataset
 from clinical_predictive_models import clinical_dataset, MLP

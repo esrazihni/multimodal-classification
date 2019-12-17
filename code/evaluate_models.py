@@ -19,8 +19,7 @@ from keras.utils import multi_gpu_model
 from sklearn.metrics import roc_auc_score
 from sklearn.model_selection import ParameterGrid
 
-sys.path.append("/home/esra/Desktop/git_repos/outcome-prediction/clinical parameter-based")
-sys.path.append("/home/esra/Desktop/git_repos/outcome-prediction/TOF-based")
+
 from helper import dataset, model
 from imaging_predictive_models import imaging_dataset
 from clinical_predictive_models import clinical_dataset, MLP

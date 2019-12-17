@@ -1,5 +1,7 @@
 """
-Created on Mon May 27 2018
+File name: get_final_models_from_gs_results.py
+Author: Esra Zihni
+Date created: 27.05.2019
 
 
 This file finds the best trained models on a given split and returns the parameter combinations that give best 
