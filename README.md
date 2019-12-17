@@ -1,4 +1,4 @@
-# Opening the Black Box of Artificial Intelligence for Clinical Decision Support: A Study Predicting Stroke Outcome 
+# Multimodal Fusion Strategies for Outcome Prediction in Stroke
 
 This repository contains the implementation and evaluation of a clinical predictors based MLP model, a neuroimaging based CNN model, as well as two multimodal fusion strategies based on neural networks for combining clinical and neuroimaging data for predicting stroke outcome in acute-ischemic patients.
 
