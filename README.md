@@ -102,10 +102,27 @@ Model performances were measured on the final training (combined training and va
 
 The table below shows the test and training performances by median and interquartile range (IQR) calculated over 100 training and test runs for each split. 
 
+(a) Test (AUC)
+| Model              | Split 1     | Split 2     | Split 3     | Split 4     | Split 5     | Splits mean |
+|--------------------|-------------|-------------|-------------|-------------|-------------|-------------|
+| CNN                | 0.61 (0.05) | 0.76 (0.03) | 0.68 (0.03) | 0.68 (0.04) | 0.67 (0.2)  | 0.68        |
+| MLP                | 0.70 (0.05) | 0.76 (0.02) | 0.80 (0.01) | 0.71 (0.06) | 0.78 (0.05) | 0.75        |
+| Extracted features | 0.60 (0.02) | 0.78 (0.01) | 0.78 (0.02) | 0.76 (0.01) | 0.83 (0.01) | 0.75        |
+| End-to-end         | 0.71 (0.04) | 0.78 (0.02) | 0.79 (0.03) | 0.73 (0.05) | 0.81 (0.04) | 0.76        |
+
+(b) Training (AUC)
+| Model              | Split 1     | Split 2     | Split 3     | Split 4     | Split 5     | Splits mean |
+|--------------------|-------------|-------------|-------------|-------------|-------------|-------------|
+| CNN                | 0.97 (0.04) | 0.99 (0.004)| 1.00 (0)    | 0.94 (0.08) | 0.89 (0.3)  | 0.96        |
+| MLP                | 0.81 (0.05) | 0.85 (0.01) | 0.87 (0.004)| 0.82 (0.03) | 0.83 (0.03) | 0.84        |
+| Extracted features | 0.97 (0.004)| 0.96 (0.006)| 0.99 (0.001)| 0.88 (0.007)| 0.99 (0.001)| 0.96        |
+| End-to-end         | 0.90 (0.06) | 0.90 (0.07) | 0.91 (0.06) | 0.92 (0.08) | 0.87 (0.08) | 0.90        |
+
+
 The figure below illustrates the test (blue) and training (orange) performance of the different frameworks. The markers show the median AUC over 100 runs and the error bars represent interquartile range (IQR).
 
 <p align="center">
-<img src="images/performance.png" alt="fig1.1" width="800"/>
+<img src="images/performance.png" alt="fig1.1" width="900"/>
 </p>
 
 ### Significance
