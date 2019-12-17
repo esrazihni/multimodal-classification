@@ -1,0 +1,90 @@
+# -----------------------------------------------------------------
+# USER DEFINED OPTIONS
+# -----------------------------------------------------------------
+
+# Data properties --------------------------------------------------
+
+dataset name : &dataname 1kplus_multimodal
+
+clinical dataset: 
+  main path : &cl_maindatapath ../clinical parameter-based/data/
+  splits path : !join [*cl_maindatapath, *dataname, _clinical_train_val_test_sets.pkl]
+  feature splits path : !join [*dataname, _clinical_features_train_val_test_sets.pkl]
+  models path : !join [../clinical parameter-based/modeling_results/, *dataname, /models/]
+
+imaging dataset:
+  main path : &img_maindatapath ../TOF-based/data/
+  splits path : !join [*img_maindatapath, *dataname, _imaging_train_val_test_set.pkl]
+  feature splits path : !join [*dataname, _imaging_features_train_val_test_sets.pkl]
+  models path : !join [../TOF-based/modeling_results/, *dataname, /models/]
+
+
+
+# Modeling Properties -------------------------------------------
+
+model name : &modelname feature_concatenation
+
+final performance measures :
+  - AUC
+  - accuracy
+  - average_class_accuracy
+  - f1
+
+number of runs : 5
+
+validation score : roc_auc
+
+save options :
+  main path : &mainsavepath modeling_results/
+  models path : !join [*mainsavepath, *dataname,  /models/,*modelname]
+  params path : !join [*mainsavepath, *dataname, /params/,*modelname]
+  scores path : !join [*mainsavepath, *dataname, /performance_scores/,*modelname]
+  figures path : !join [*mainsavepath, *dataname, /figures/,*modelname]
+
+tuning parameters:
+  feature_concatenation:
+    batch_size : [16,32,64]
+    learning_rate : [0.0001, 0.001, 0.01, 0.1]
+    dropout_rate : [0.1, 0.2]
+    l2_ratio : [0.00001, 0.0001, 0.001, 0.01]
+    num_neurons_embedding : [[16, 16], [32,16]]
+    num_neurons_final : [16,32]
+
+  end_to_end:
+    batch_size : [8,16]
+    learning_rate : [0.0001, 0.001]
+    dropout_rate : [0.1, 0.2]
+    l2_ratio : [0.001, 0.01]
+    num_neurons_MLP : [5, 10, 15]
+    num_filters : [[16,32,64]]
+    num_neurons_embedding : [[16, 16], [32,16]]
+    num_neurons_final : [16,32]
+
+# -----------------------------------------------------------------
+# DEFAULT OPTIONS
+# -----------------------------------------------------------------
+
+# Model hyperparameters:
+
+hyperparameters:
+  feature_concatenation:
+    epochs : 100
+    iter_patience : 5
+    min_delta : 0.01
+    lr_decay : 0.00005
+    hidden_activation : 'relu'
+    out_activation : 'softmax'
+    loss_func : 'binary_crossentropy'
+    optimizer : 'adam'
+    weight_init : 'glorot_uniform'
+
+  end_to_end:
+    epochs : 20
+    iter_patience : 2
+    min_delta : 0.02
+    hidden_activation : 'relu'
+    out_activation : 'softmax'
+    loss_func : 'binary_crossentropy'
+    optimizer : 'adam'
+    weight_init : 'glorot_uniform'
+

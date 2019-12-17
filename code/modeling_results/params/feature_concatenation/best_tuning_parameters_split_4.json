@@ -1,0 +1,1 @@
+{"batch_size": 32, "dropout_rate": 0.1, "l2_ratio": 0.001, "learning_rate": 0.0001, "num_neurons_embedding": [16, 16], "num_neurons_final": 16}
