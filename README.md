@@ -40,6 +40,9 @@ The table below presents the clinical characteristics of the 1000plus dataset.
 
 The figure below shows the middle slices of a TOF-MRA image taken from the sagittal, coronal and horizontal planes.
 
+<p align="center">
+<img src="images/TOF_MRA_example.png" alt="fig1.1" width="600"/>
+</p>
 
 ## Methods:
 
@@ -55,7 +58,7 @@ The clinical data was modeled using an MLP with a single  fully  connected  (FC)
 The 3D imaging data was modeled using a 3D convolutional neural network (CNN) consisting of three convolutional blocks followed by a single FC layer. The figure below illustrates the architecture of the CNN used in this work. The architecture consists of three convolutional and three max pooling layers followed by an FC layer. Convolutional and FC layer neurons were ReLUs. L2 norm regularization was used in the convolutional, FC and output layer neurons. Dropout was used only on the FC layer neurons. Filter size, filter stride, pooling size, number of filters in the convolutional layers and number of neurons in the FC layer were chosen during model tuning.
 
 <p align="center">
-<img src="images/CNN.png" alt="fig1.1" width="500"/>
+<img src="images/CNN.png" alt="fig1.1" width="600"/>
 </p>
 
 ### Multimodal Framework: Extracted Features and End-to-end
@@ -69,6 +72,47 @@ L2 norm regularization and dropout was used in the FC layers. The number of neur
 #### End-to-end strategy:
 The framework was trained end-to-end on both data modalities simultaneously. Convolutional and FC layer neurons were ReLUs. L2 norm regularization was used in the convolutional, FC and output layer neurons. Dropout was used only on the FC layer neurons. For the CNN part filter size, filter stride and pooling size was set to (3x3x3), (1x1x1) and (3x3x3) respectively. The number of filters were set to 16,32,64 for the three convolutional layers and the number of neurons in the FC layer was set to 128.   The number of neurons in the MLP hidden layer, the embedding and the final FC layers were chosen during model tuning.
 
+The figure below illustrates all four frameworks.
+
+<p align="center">
+<img src="images/frameworks.PNG" alt="fig1.1" width="800"/>
+</p>
+
+### Model Training
+Binary cross-entropy loss, was selected as the loss function. Loss was minimized using the Adaptive Moment Estimation (Adam) optimizer. Initial weights were sampled from a Glorot uniform distribution. A Softmax function was used as the output layer activation. Early stopping was introduced during training in order to prevent over-fitting: training stopped once the
+improvement in validation loss was below a specified value.
+
+### Model Selection
+
+#### Training-Validation-Test Sets
+The data was randomly split into three subsets: training, validation and test with 200, 50 and 63 patients in each respectively. In order to account for data variability,the random selection of training, validation and test sets was repeated five times resulting in five different splits. 
+
+#### Grid Search
+The models were tuned, i.e best hyperparameters were selected, using gridsearch: Models  were  trained  and  evaluated  on  the training and validation sets respectively for each hyper-parameter combination. The hyper-parameter combination that
+yielded best model performance on the validation set was chosen for final training. Same sets were used for all frameworks to achieve comparable results.
+
+Model selection was repeated for the five training-validation-test splits, resulting in five models for each framework.
+
+### Model Evaluation
+Model performances were measured on the final training (combined training and validation) and test sets of each split using Area under the Curve (AUC) score. Final training and evaluation was repeated 100 times for each split and the median and interquartile range (IQR) over the 100 training and test AUC scores was used as the final performance measure. Additionally, a non-parametric paired t-test, i.e. Wilcoxon signed rank test, was performed on test performances to compare the multimodal frameworks (i.e. end-to-end and feature extraction) to the clinical data driven MLP network. 
+
+## Results:
+
+### Performance Results
+
+The table below shows the test and training performances by median and interquartile range (IQR) calculated over 100 training and test runs for each split. 
+
+The figure below illustrates the test (blue) and training (orange) performance of the different frameworks. The markers show the median AUC over 100 runs and the error bars represent interquartile range (IQR).
+
+<p align="center">
+<img src="images/performance.png" alt="fig1.1" width="800"/>
+</p>
+
+### Significance
+
+The table below shows the Wilcoxon signed rank test p values on test performances over 100 runs. The test compares a) end-to-end against the MLP and b) extracted features against the MLP.
 
 
+## License
+This project is licensed under the [MIT license](LICENSE).
 
